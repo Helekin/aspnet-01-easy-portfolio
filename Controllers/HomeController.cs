@@ -15,7 +15,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var person = new Person()
+        {
+            Name = "Hellekin",
+            Age = 29
+        };
+
+        return View(person);
     }
 
     public IActionResult Privacy()
