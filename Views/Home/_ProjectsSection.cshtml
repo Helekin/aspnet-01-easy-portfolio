@@ -1,0 +1,28 @@
+@if (Model.Projects is not null)
+{
+    <div class="text-center" style="padding-top:6rem;">
+    <h1>My projects</h1>
+    <p>Here you can see all my projects</p>
+</div>
+
+    <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var project in Model.Projects)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@project.ImageUrl" class="card-img-top" alt="@project.Title" />
+                        <div class="card-body">
+                            <h5 class="card-title">@project.Title</h5>
+                            <p class="card-text">@project.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="@project.Link" target="_blank"
+                                rel="noopener noreferrer">Visitar</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
