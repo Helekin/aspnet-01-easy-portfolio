@@ -1,55 +1,33 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using aspnet_01_easy_portfolio.Models;
+using aspnet_01_easy_portfolio.Services;
 
 namespace aspnet_01_easy_portfolio.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IProjectService _projectService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IProjectService projectService)
     {
-        _logger = logger;
+        _projectService = projectService;
     }
 
     public IActionResult Index()
     {
-        var projects = GetProjects().Take(3).ToList();
+        var projects = _projectService.GetProjects().Take(3).ToList();
 
         var home = new HomeViewModel() { Projects = projects };
 
         return View(home);
     }
 
-    private List<ProjectViewModel> GetProjects()
+    public IActionResult Projects()
     {
-        return new List<ProjectViewModel>(){
-        new ProjectViewModel{
-            Title="Amazon",
-            Description="E-Commerce",
-            Link="https://www.amazon.com/",
-            ImageUrl="/img/amazon.PNG"
-        },
-        new ProjectViewModel{
-            Title="New York Times",
-            Description="Blog",
-            Link="https://www.nytimes.com/",
-            ImageUrl="/img/nyt.PNG"
-        },
-        new ProjectViewModel{
-            Title="Reddit",
-            Description="Social App",
-            Link="https://www.reddit.com/",
-            ImageUrl="/img/reddit.PNG"
-        },
-        new ProjectViewModel{
-            Title="Steam",
-            Description="Games",
-            Link="https://store.steampowered.com/",
-            ImageUrl="/img/steam.PNG"
-        }
-        };
+        var projects = _projectService.GetProjects();
+
+        return View(projects);
     }
 
     public IActionResult Privacy()

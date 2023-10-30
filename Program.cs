@@ -1,7 +1,10 @@
+using aspnet_01_easy_portfolio.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IProjectService, ProjectService>();
 
 var app = builder.Build();
 
